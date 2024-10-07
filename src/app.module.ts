@@ -9,10 +9,14 @@ import { ConfigModule } from './common/config/config.module';
 import { CommonModule } from './common/common.module';
 import { AdminModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
+import { TournamentController } from './tournament/tournament.controller';
+import { TournamentsController } from './tournaments/tournaments.controller';
+import { TournamentsService } from './tournaments/tournaments.service';
+import { TournamentsModule } from './tournaments/tournaments.module';
 
 @Module({
-  imports: [ServicesModule, ConfigModule, CommonModule, AdminModule, RolesModule],
-  controllers: [AppController, CommonController, ConfigController, ServicesController],
-  providers: [AppService],
+  imports: [ServicesModule, ConfigModule, CommonModule, AdminModule, RolesModule, TournamentsModule],
+  controllers: [AppController, CommonController, ConfigController, ServicesController, TournamentController, TournamentsController],
+  providers: [AppService, TournamentsService],
 })
 export class AppModule {}

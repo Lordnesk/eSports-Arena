@@ -1,4 +1,4 @@
-import { Controller, Post, Patch, Body } from '@nestjs/common';
+import { Controller, Post, Body, Patch, Delete } from '@nestjs/common';
 import { UserService } from '../services/admin.service';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
@@ -11,4 +11,5 @@ export class UsersController {
     create(@Body() createUserDto: CreateUserDto) {
         return this.UserService.create(createUserDto);
     }
+
 }
