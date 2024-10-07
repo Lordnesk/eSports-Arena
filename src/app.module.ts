@@ -7,10 +7,11 @@ import { ServicesController } from './services/services.controller';
 import { ServicesModule } from './services/services.module';
 import { ConfigModule } from './config/config.module';
 import { CommonModule } from './common/common.module';
-import { AdminModule } from './admin/admin.module';
+import { AdminModule } from './users/users.module';
+import { RolesModule } from './roles/roles.module';
 
 @Module({
-  imports: [ServicesModule, ConfigModule, CommonModule, AdminModule],
+  imports: [ServicesModule, ConfigModule, CommonModule, AdminModule, RolesModule],
   controllers: [AppController, CommonController, ConfigController, ServicesController],
   providers: [AppService],
 })

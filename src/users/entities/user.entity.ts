@@ -1,7 +1,8 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, Unique} from "typeorm"
+import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, Unique, JoinColumn} from "typeorm"
+import { Role } from "src/roles/entitites/role.entity";
 
 @Entity()
-export class Admin {
+export class User {
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
