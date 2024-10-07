@@ -1,22 +1,29 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { CommonController } from './common/common.controller';
-import { ConfigController } from './common/config/config.controller';
-import { ServicesController } from './services/services.controller';
-import { ServicesModule } from './services/services.module';
-import { ConfigModule } from './common/config/config.module';
 import { CommonModule } from './common/common.module';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AdminModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
-import { TournamentController } from './tournament/tournament.controller';
 import { TournamentsController } from './tournaments/tournaments.controller';
 import { TournamentsService } from './tournaments/tournaments.service';
 import { TournamentsModule } from './tournaments/tournaments.module';
+import { envValidationSchema } from './common/config/joi.validation';
+import { DatabaseConfigService } from './common/config/database-config';
 
 @Module({
-  imports: [ServicesModule, ConfigModule, CommonModule, AdminModule, RolesModule, TournamentsModule],
-  controllers: [AppController, CommonController, ConfigController, ServicesController, TournamentController, TournamentsController],
-  providers: [AppService, TournamentsService],
+  imports: [
+    ConfigModule.forRoot({
+      validationSchema: envValidationSchema,
+      envFilePath: '.env',
+      isGlobal: true,
+      }),
+      TypeOrmModule.forRootAsync({
+        imports: [ConfigModule],
+        useClass: DatabaseConfigService,
+      }),
+      CommonModule, 
+      AdminModule, 
+      RolesModule, 
+      TournamentsModule],
 })
 export class AppModule {}
