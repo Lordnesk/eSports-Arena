@@ -11,7 +11,7 @@ import { CustomUnauthorizedException } from "src/common/exceptions/custom-unauth
 export class RolesGuard implements CanActivate {
     constructor(
         private reflector: Reflector,
-        private usersService: UserService,
+        private userService: UserService,
         private rolesService: RolesService,
     ) {}
 
@@ -25,7 +25,7 @@ export class RolesGuard implements CanActivate {
             throw new CustomUnauthorizedException('User not found');
         }
 
-        const roleId = await this.usersService.getRoleByUserId(user.id);
+        const roleId = await this.userService.getRoleByUserId(user.id);
         const { name } = await this.rolesService.findRole(roleId);
 
         if (!name) {

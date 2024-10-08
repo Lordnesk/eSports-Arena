@@ -1,4 +1,4 @@
-import { Patch, Controller, Param, Post, Body, Delete, UseGuards } from '@nestjs/common';
+import { Patch, Controller, Param, Get, Post, Body, Delete, UseGuards } from '@nestjs/common';
 import { TournamentsService } from './tournaments.service';
 import { UpdateTournamentDto } from './dto/update-tournament.dto';
 import { CreateTournamentDto } from './dto/create-tournament.dto';
@@ -12,7 +12,7 @@ export class TournamentsController {
 
     @Post()
     create(@Body() createTournamentDto: CreateTournamentDto) {
-        return this.tournamentsService.create(createTournamentDto);
+        return this.tournamentsService.createTournament(createTournamentDto);
     }
 
     @Patch(":id")

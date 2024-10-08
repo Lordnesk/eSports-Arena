@@ -1,5 +1,6 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, Unique, JoinColumn} from "typeorm"
+import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, Unique, JoinColumn, OneToMany} from "typeorm"
 import { Role } from "src/roles/entitites/role.entity";
+import { Tournament } from "src/tournaments/entitites/tournament.entity";
 
 @Entity()
 export class User {
@@ -19,4 +20,5 @@ export class User {
 
     @Column({ name: "roleId"})
     roleId: string;
+
 }

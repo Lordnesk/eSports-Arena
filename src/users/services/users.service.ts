@@ -12,9 +12,21 @@ export class UserService {
             private readonly userRepository: Repository<User>,
     ){}
 
-    async create(createUserDto: CreateUserDto){
-        return await this.userRepository.save(createUserDto)
+    async create(createUserDto: CreateUserDto): Promise<User> {
+        try {
+            const user = this.userRepository.create(createUserDto);
+            return await this.userRepository.save(user);
+        } catch (error) {
+            console.error('Error creating user:', error); // Para depuración
+            throw new BadRequestException('Error creating user');
+        }
     }
+    
+
+    async findAllUsers(){
+        return {User}
+    }
+
     async findOneByEmail(email: string){
         try {
             return await this.userRepository.findOneBy({email})

@@ -16,5 +16,5 @@ export class Tournament {
     numberOfPlayers: number
 
     @OneToMany(() => User, user => user.role)
-    Users: User[]
+    users: User[]
 }

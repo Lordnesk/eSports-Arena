@@ -15,7 +15,7 @@ export class TournamentsService {
             private readonly tournamentRepository: Repository<Tournament>
     ){}
 
-    async create (createTournamentDto: CreateTournamentDto){
+    async createTournament(createTournamentDto: CreateTournamentDto){
         return await this.tournamentRepository.save(createTournamentDto)
     }
 

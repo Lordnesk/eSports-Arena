@@ -1,19 +1,25 @@
-import { Controller, Post, Body, Patch, Delete, Param, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, Patch, Delete, Param, UseGuards, BadRequestException } from '@nestjs/common';
 import { UserService } from '../services/users.service';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { Roles } from 'src/auth/roles.decorator';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
 
-@Controller('Users')
+@Controller('users')
 @UseGuards(RolesGuard)
 export class UsersController {
     constructor(private readonly userService: UserService){}
 
     @Post()
-    create(@Body() createUserDto: CreateUserDto) {
-        return this.userService.create(createUserDto);
+    async create(@Body() createUserDto: CreateUserDto) {
+        try {
+            return await this.userService.create(createUserDto); // Espera el resultado
+        } catch (error) {
+            console.error('Error in UsersController:', error); // Para depuración
+            throw new BadRequestException('Error creating user');
+        }
     }
+    
 
     @Patch(":id")
     async updateUser(
