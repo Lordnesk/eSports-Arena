@@ -36,4 +36,12 @@ export class TournamentsService {
         Object.assign(tournament, updateTournamentDto);
         return this.tournamentRepository.save(tournament)
     }
+
+    async deleteTournament(id: string): Promise<void> {
+        const tournament = await this.tournamentRepository.delete(id);
+
+        if (tournament.affected === 0){
+            throw new NotFoundException(`Tournament with id ${id} not found`)
+        }
+    }
 }

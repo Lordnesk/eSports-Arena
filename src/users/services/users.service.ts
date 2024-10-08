@@ -9,7 +9,7 @@ import { Repository } from 'typeorm';
 export class UserService {
     constructor(
         @InjectRepository(User)
-            private readonly userRepository: Repository<User>
+            private readonly userRepository: Repository<User>,
     ){}
 
     async create(createUserDto: CreateUserDto){
@@ -36,5 +36,12 @@ export class UserService {
     async getRoleByUserId(id:string){
         const user = await this.userRepository.findOne({where: {id}})
         return user.roleId
+    }
+
+    async deleteUser(id: string,): Promise<void> {
+        const user = await this.userRepository.delete(id);
+        if (user.affected === 0){
+            throw new NotFoundException(`User with id ${id} not found`)
+        }
     }
 }
