@@ -2,13 +2,16 @@ import { Module } from '@nestjs/common';
 import { CommonModule } from './common/common.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsersModule } from './users/users.module';
-import { RolesModule } from './roles/roles.module';
-import { TournamentsModule } from './tournaments/tournaments.module';
 import { envValidationSchema } from './common/config/joi.validation';
 import { DatabaseConfigService } from './common/config/database-config';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ErrorHandlingInterceptor } from './common/interceptors/error-handling.interceptor';
+import { PlayersModule } from './players/players.module';
+import { AdminsModule } from './admins/admins.module';
+import { TournamentModule } from './tournament/tournament.module';
+import { ResultsModule } from './results/results.module';
+import { SeederModule } from './common/seed/seeder.module';
+import { CompetitionsModule } from './competitions/competitions.module';
 
 @Module({
   imports: [
@@ -21,10 +24,13 @@ import { ErrorHandlingInterceptor } from './common/interceptors/error-handling.i
         imports: [ConfigModule],
         useClass: DatabaseConfigService,
       }),
-      CommonModule, 
-      UsersModule, 
-      RolesModule, 
-      TournamentsModule,
+      CommonModule,
+      PlayersModule,
+      TournamentModule,
+      ResultsModule,
+      AdminsModule,
+      SeederModule,
+      CompetitionsModule, 
     ],
       providers: [
         {
