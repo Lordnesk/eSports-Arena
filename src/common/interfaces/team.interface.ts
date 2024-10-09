@@ -1,7 +1,4 @@
-
-export interface Admin {
+export interface Iteam {
     id: number;
     name: string;
-    
 }
-

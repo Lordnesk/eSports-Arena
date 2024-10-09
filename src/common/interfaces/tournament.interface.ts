@@ -1,7 +1,4 @@
-
-export interface Admin {
+export interface ITournament {
     id: number;
     name: string;
-    
 }
-

@@ -1,7 +1,4 @@
-
-export interface Admin {
+export interface Icountry {
     id: number;
     name: string;
-    
 }
-
